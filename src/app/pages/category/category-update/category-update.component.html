@@ -1,0 +1,17 @@
+<mat-card>add / update category</mat-card>
+<div class="example-container">
+    <mat-form-field>
+        <mat-select placeholder="CATEGORY TYPE" required [(value)]="catetypeSelected">
+            <mat-option *ngFor="let ctype of categorytype" [value]="ctype">{{ctype.categorytype}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="CATEGORY" required [(ngModel)]="category.categoryName">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+
+    <button mat-raised-button color="primary" (click)="saveCategory()" [disabled]="disabledButton()">OK</button>
+    <button mat-raised-button color="accent" (click)="closeDialog()">CANCEL</button>
+</div>

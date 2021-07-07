@@ -1,0 +1,15 @@
+<mat-card>Delete category?</mat-card>
+<br>
+<mat-divider></mat-divider>
+<mat-label>ID: </mat-label>
+<mat-label class="right-text">{{category.categoryId}}</mat-label>
+<mat-divider></mat-divider>
+<mat-label>NAME:</mat-label>
+<mat-label class="right-text">{{category.categoryName}}</mat-label>
+<mat-divider></mat-divider>
+<mat-label>TYPE:</mat-label>
+<mat-label class="right-text">{{category.categorytype.categorytype}}</mat-label>
+<mat-divider></mat-divider>
+<br>
+<button mat-raised-button color="primary" (click)="deleteData()">OK</button>
+<button mat-raised-button color="accent" (click)="closeDialog()">CANCEL</button>

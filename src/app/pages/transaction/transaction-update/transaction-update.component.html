@@ -1,0 +1,30 @@
+<mat-card>add / update transaction</mat-card>
+<div class="example-container">
+
+    <mat-button-toggle-group [(ngModel)]="catType" (click)="listCat()">
+        <mat-button-toggle value="1">Incomes</mat-button-toggle>
+        <mat-button-toggle value="2">Expenses</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-form-field>
+        <mat-select placeholder="CATEGORY" required [(value)]="catSelected">
+            <mat-option *ngFor="let c of category" [value]="c">{{c.categoryName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="AMOUNT" required [(ngModel)]="transaction.amount">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Transaction date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-divider></mat-divider>
+
+    <button mat-raised-button color="primary" (click)="saveTransaction()" [disabled]="disabledButton()">OK</button>
+    <button mat-raised-button color="accent" (click)="closeDialog()">CANCEL</button>
+</div>

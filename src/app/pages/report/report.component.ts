@@ -11,6 +11,7 @@ export class ReportComponent implements OnInit {
 
   chart: any;
   typeChart!: string;
+  pdfSrc: string = '';
 
   constructor(private transactionService: TransactionService) {
     Chart.register(...registerables);
@@ -49,6 +50,27 @@ export class ReportComponent implements OnInit {
           ]
         }
       });
+    });
+  }
+
+  generateReport() {
+    this.transactionService.generateReport().subscribe(data => {
+      const file = new Blob([data], { type: "application/pdf" });
+      const url = window.URL.createObjectURL(file);
+      window.open(url);
+    });
+  }
+
+  downloadReport() {
+    this.transactionService.generateReport().subscribe(data => {
+      const url = window.URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.setAttribute('style', 'display:none;');
+      document.body.appendChild(a);
+      a.href = url;
+      a.download = 'report.pdf'
+      a.click();
+      return url;
     });
   }
 

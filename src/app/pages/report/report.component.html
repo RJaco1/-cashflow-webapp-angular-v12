@@ -1,4 +1,9 @@
-<mat-toolbar>transactions report</mat-toolbar>
+<mat-toolbar>
+    <span>Transactions report</span>
+    <span class="example-spacer"></span>
+    <button mat-button color="primary" (click)="generateReport()">view PDF</button>
+    <button mat-button color="primary" (click)="downloadReport()">download PDF</button>
+</mat-toolbar>
 
 <div [hidden]="!chart">
     <canvas id="canvas">{{chart}}</canvas>

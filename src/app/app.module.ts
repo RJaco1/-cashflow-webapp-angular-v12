@@ -14,6 +14,7 @@ import { TransactionUpdateComponent } from './pages/transaction/transaction-upda
 import { TransactionDeleteComponent } from './pages/transaction/transaction-delete/transaction-delete.component';
 import { ReportComponent } from './pages/report/report.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HomeComponent } from './pages/home/home.component';
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -37,8 +37,14 @@ export class TransactionService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  transactionReport(){
+  transactionReport() {
     return this.http.get<TransactionReport[]>(`${this.url}/transactionReport`);
+  }
+
+  generateReport() {
+    return this.http.get(`${this.url}/generateReport`, {
+      responseType: 'blob'
+    });
   }
 
 }

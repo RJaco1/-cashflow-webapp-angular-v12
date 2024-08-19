@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Category } from 'src/app/_model/category';
+import { CategoryType } from 'src/app/_model/categoryType';
+import { CategorytypeService } from 'src/app/_service/categorytype.service';
 import { CategoryService } from 'src/app/_service/category.service';
 import { CategoryDeleteComponent } from './category-delete/category-delete.component';
 import { CategoryUpdateComponent } from './category-update/category-update.component';
@@ -24,8 +26,9 @@ export class CategoryComponent implements OnInit {
   category!: Category;
   show: boolean = false;
   catType!: number;
+  categType: CategoryType[] = [];
 
-  constructor(private categoryService: CategoryService, private dialog: MatDialog,
+  constructor(private categoryTypeService: CategorytypeService, private categoryService: CategoryService, private dialog: MatDialog,
     private snackBar: MatSnackBar) {
   }
 
@@ -38,6 +41,10 @@ export class CategoryComponent implements OnInit {
 
     this.categoryService.messageChange.subscribe(data => {
       this.snackBar.open(data, 'Notification', { duration: 2500 });
+    });
+    
+    this.categoryTypeService.listCategoryType().subscribe(data => {
+      this.categType = data;
     });
 
     this.listAllCategories();

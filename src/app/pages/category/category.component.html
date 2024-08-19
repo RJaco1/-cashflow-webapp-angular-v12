@@ -3,13 +3,12 @@
     <span class="example-spacer"></span>
     <mat-button-toggle-group [(ngModel)]="catType" (click)="categoryTypeSelected()">
         <mat-button-toggle value="0">All categories</mat-button-toggle>
-        <mat-button-toggle value="1">Income</mat-button-toggle>
-        <mat-button-toggle value="2">Expense</mat-button-toggle>
+        <mat-button-toggle *ngFor="let ct of categType" [value]="ct.categorytypeId">{{ct.categorytype}}</mat-button-toggle>
     </mat-button-toggle-group>
 </mat-toolbar>
 <mat-form-field class="mat-form-field">
     <mat-label>Filter category</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Food" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Salary" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8">

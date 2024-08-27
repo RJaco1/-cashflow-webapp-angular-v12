@@ -1,12 +1,13 @@
-<div class="example-container">
+<app-not-found404 *ngIf="notFound404Service.isPageNotFound()"></app-not-found404>
+<div class="container">
 
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" *ngIf="loginService.activeSession()">
         <button mat-icon-button (click)="drawer.toggle()">
             <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
             <mat-icon *ngIf="drawer.opened">close</mat-icon>
         </button>
         <a mat-button routerLink="home"><span>Cash Flow</span></a>
-        <span class="example-spacer"></span>
+        <span class="spacer"></span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
         </button>
@@ -15,15 +16,15 @@
                 <mat-icon>person</mat-icon>
                 <span>my profile</span>
             </button>
-            <button mat-menu-item routerLink="/login">
+            <button mat-menu-item (click)="loginService.logout()">
                 <mat-icon>logout</mat-icon>
                 <span>log out</span>
             </button>
         </mat-menu>
     </mat-toolbar>
 
-    <mat-drawer-container class="example-sidenav-container" autosize>
-        <mat-drawer #drawer class="example-sidenav" mode="side">
+    <mat-drawer-container class="sidenav-container" autosize>
+        <mat-drawer #drawer class="sidenav" mode="side">
             <img src="assets/cash-flow.png" class="logo">
             <mat-divider></mat-divider>
             <button mat-menu-item (click)="drawer.toggle()" routerLink="/categories">
@@ -43,7 +44,7 @@
             <mat-divider></mat-divider>
         </mat-drawer>
 
-        <mat-drawer-content>
+        <mat-drawer-content *ngIf="!notFound404Service.isPageNotFound()">
             <router-outlet></router-outlet>
         </mat-drawer-content>
     </mat-drawer-container>

@@ -1,0 +1,16 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="align-center">
+  <h2>User Login</h2>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- (ngSubmit)="onSubmit(loginForm.value)" -->
+    <input placeholder="Email Id" type="text" name="email" [(ngModel)]="user" />
+    <!-- [(ngModel)]="user.email" -->
+    <input placeholder="Password" type="password" name="password" [(ngModel)]="pass" />
+    <!-- [(ngModel)]="user.password" -->
+    <div class="btn-div">
+      <button type="submit" [disabled]="!loginForm.valid" class="login-btn">
+        Login
+      </button>
+    </div>
+  </form>
+</div>

@@ -14,6 +14,8 @@ import { TransactionUpdateComponent } from './pages/transaction/transaction-upda
 import { TransactionDeleteComponent } from './pages/transaction/transaction-delete/transaction-delete.component';
 import { ReportComponent } from './pages/report/report.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './login/login.component';
+import { NotFound404Component } from './pages/not-found404/not-found404.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { HomeComponent } from './pages/home/home.component';
     TransactionUpdateComponent,
     TransactionDeleteComponent,
     ReportComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    NotFound404Component
   ],
   imports: [
     BrowserModule,

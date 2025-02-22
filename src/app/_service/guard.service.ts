@@ -4,7 +4,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { TOKEN_NAME } from '../_shared/var.constant';
-import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'

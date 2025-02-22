@@ -8,7 +8,7 @@ import { HOST, TOKEN_NAME } from '../_shared/var.constant';
 })
 export class CategorytypeService {
 
-  url: string = `${HOST}/categoriesType`;
+  readonly url: string = `${HOST}/categoriesType`;
   constructor(private http: HttpClient) {
   }
 

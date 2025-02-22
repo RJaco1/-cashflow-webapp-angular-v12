@@ -23,9 +23,8 @@ export class CategoryDeleteComponent implements OnInit {
   }
 
   deleteData() {
-    console.log(this.category.categoryId);
-    this.categoryService.deleteCategory(this.category.categoryId).subscribe(data => {
-      this.categoryService.listCategory().subscribe(cat => {
+    this.categoryService.deleteUserCategory(this.category.categoryId).subscribe(() => {
+      this.categoryService.getUserCategories().subscribe(cat => {
         this.categoryService.categoryChange.next(cat);
         this.categoryService.messageChange.next('category removed');
       });

@@ -31,15 +31,20 @@ export class TransactionUpdateComponent implements OnInit {
     this.transaction = new Transaction();
     this.currency = new Currency();
     this.account = new Account();
+    this.catSelected = new Category();
     this.updateData = this.data != null && this.data.transactionId > 0;
     this.transaction.transactionId = this.data.transactionId;
     this.transaction.amount = this.data.amount;
     this.selectedDate = this.dateConverter(this.data.date);
     this.transaction.date = this.data.date;
-    this.catSelected = this.data.category;
-    this.transaction.category = this.data.category;
+    this.catSelected.categoryId = this.data.categoryId;
+    this.catSelected.categoryName = this.data.categoryName;
+    this.transaction.categoryId = this.data.categoryId;
+    this.transaction.categoryName = this.data.categoryName;
+    this.transaction.currencyId = this.data.currencyId;
     this.transaction.currency = this.data.currency;
-    this.transaction.account = this.data.account;
+    this.transaction.accountId = this.data.accountId;
+    this.transaction.accountName = this.data.accountName;
     this.listCat();
     this.currency.currencyId = 1;
     this.currency.currency = "$";
@@ -48,7 +53,7 @@ export class TransactionUpdateComponent implements OnInit {
   }
 
   listCat() {
-    this.categoryService.listCategorybyCategoryType(this.catType).subscribe(data => {
+    this.categoryService.findUserCategoroesbyCategoryType(this.catType).subscribe(data => {
       this.category = data;
     });
   }
@@ -58,21 +63,25 @@ export class TransactionUpdateComponent implements OnInit {
     t.transactionId = this.transaction.transactionId;
     t.amount = this.transaction.amount;
     t.date = this.selectedDate.toISOString();
-    t.category = this.catSelected;
+    t.categoryId = this.catSelected.categoryId;
     if (this.updateData) {
+      t.currencyId = this.transaction.currencyId;
       t.currency = this.transaction.currency;
-      t.account = this.transaction.account;
-      this.transactionService.updateTransaction(t).subscribe(data => {
-        this.transactionService.listTransaction(0, 5).subscribe(d => {
+      t.accountId = this.transaction.accountId;
+      t.accountName = this.transaction.accountName;
+      this.transactionService.updateTransaction(t).subscribe(() => {
+        this.transactionService.getUserTransactions(0, 5).subscribe(d => {
           this.transactionService.transactionChange.next(d);
           this.transactionService.messageChange.next('transaction updated');
         });
       });
     } else {
-      t.currency = this.currency;
-      t.account = this.account;
-      this.transactionService.addTransaction(t).subscribe(data => {
-        this.transactionService.listTransaction(0, 5).subscribe(d => {
+      t.currencyId = this.currency.currencyId;
+      t.currency = this.currency.currency;
+      t.accountId = this.account.accountId;
+      t.accountName = this.account.accountName;
+      this.transactionService.addUserTransaction(t).subscribe(() => {
+        this.transactionService.getUserTransactions(0, 5).subscribe(d => {
           this.transactionService.transactionChange.next(d);
           this.transactionService.messageChange.next('transaction added');
         });

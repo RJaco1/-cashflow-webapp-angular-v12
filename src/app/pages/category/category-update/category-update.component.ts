@@ -44,15 +44,15 @@ export class CategoryUpdateComponent implements OnInit {
     c.categoryName = this.category.categoryName;
     c.categorytype = this.catetypeSelected;
     if (this.updateData) {
-      this.categoryService.updateCategory(c).subscribe(data => {
-        this.categoryService.listCategory().subscribe(cat => {
+      this.categoryService.updateUserCategory(c).subscribe(() => {
+        this.categoryService.getUserCategories().subscribe(cat => {
           this.categoryService.categoryChange.next(cat);
           this.categoryService.messageChange.next('category updated');
         });
       });
     } else {
-      this.categoryService.addCategory(c).subscribe(data => {
-        this.categoryService.listCategory().subscribe(cat => {
+      this.categoryService.addUserCategory(c).subscribe(() => {
+        this.categoryService.getUserCategories().subscribe(cat => {
           this.categoryService.categoryChange.next(cat);
           this.categoryService.messageChange.next('category added');
         });

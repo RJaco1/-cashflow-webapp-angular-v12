@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -16,6 +16,7 @@ import { ReportComponent } from './pages/report/report.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NotFound404Component } from './pages/not-found404/not-found404.component';
+import { ServerErrorsInterceptor } from './_shared/server-errors.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,12 @@ import { NotFound404Component } from './pages/not-found404/not-found404.componen
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ServerErrorsInterceptor,
+    multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

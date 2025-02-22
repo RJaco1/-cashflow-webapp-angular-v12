@@ -1,15 +1,17 @@
-import { Account } from "./account";
-import { Category } from "./category";
-import { Currency } from "./currency";
-import { UserAccount } from "./userAccount";
+import { CategoryType } from "./categoryType";
 
 export class Transaction {
     transactionId!: number;
     amount!: number;
     date!: string;
-    category!: Category;
-    currency!: Currency;
-    account!: Account;
-    userAccount!: UserAccount;
-
+    categorytype!: CategoryType;
+    categoryId!: number;
+    categoryName!: string;
+    currencyId!: number;
+    currency!: string;
+    accountId!: number;
+    accountName!: string;
+    userId!: number;
+    username!: string;
+    email!: string;
 }

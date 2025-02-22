@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Transaction } from 'src/app/_model/transaction';
+import { CategoryType } from 'src/app/_model/categoryType';
+import { CategorytypeService } from './../../_service/categorytype.service';
 import { TransactionService } from 'src/app/_service/transaction.service';
 import { TransactionDeleteComponent } from './transaction-delete/transaction-delete.component';
 import { TransactionUpdateComponent } from './transaction-update/transaction-update.component';
@@ -25,13 +27,14 @@ export class TransactionComponent implements OnInit {
   show: boolean = false;
   totalEntries!: number;
   catType!: number;
+  categType: CategoryType[] = [];
 
-  constructor(private transactionService: TransactionService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private transactionService: TransactionService, private categoryTypeService: CategorytypeService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
     this.transactionService.transactionChange.subscribe(data => {
-      let transaction = JSON.parse(JSON.stringify(data)).content;
+      const transaction = JSON.parse(JSON.stringify(data)).content;
       this.totalEntries = JSON.parse(JSON.stringify(data)).totalElements;
 
       this.show = transaction.length != 0;
@@ -48,11 +51,16 @@ export class TransactionComponent implements OnInit {
     this.transactionService.messageChange.subscribe(data => {
       this.snackBar.open(data, 'notification', { duration: 2500 });
     });
+
+    this.categoryTypeService.listCategoryType().subscribe(data => {
+      this.categType = data;
+    });
+
     this.listAllTransactions();
   }
 
   listAllTransactions() {
-    this.transactionService.listTransaction(0, 5).subscribe(data => {
+    this.transactionService.getUserTransactions(0, 5).subscribe(data => {
       let transaction = JSON.parse(JSON.stringify(data)).content;
       this.totalEntries = JSON.parse(JSON.stringify(data)).totalElements;
 
@@ -112,7 +120,7 @@ export class TransactionComponent implements OnInit {
         this.dataSource.sort = this.sort;
       });
     } else {
-      this.transactionService.listTransaction(e.pageIndex, e.pageSize).subscribe(data => {
+      this.transactionService.getUserTransactions(e.pageIndex, e.pageSize).subscribe(data => {
 
         let transaction = JSON.parse(JSON.stringify(data)).content;
         this.totalEntries = JSON.parse(JSON.stringify(data)).totalElements;

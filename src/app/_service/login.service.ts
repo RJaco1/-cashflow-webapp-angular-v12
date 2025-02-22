@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
 
-  url: string = `${HOST}/oauth/token`;
+  readonly url: string = `${HOST}/oauth/token`;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -27,9 +27,9 @@ export class LoginService {
 
   logout() {
     const access_token: string = JSON.parse(sessionStorage.getItem(TOKEN_NAME)!).access_token;
-    this.http.get(`${HOST}/users/revoke/${access_token}`, {
+    this.http.get(`${HOST}/users/${access_token}/revoke`, {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')
-    }).subscribe(data => {
+    }).subscribe(() => {
       sessionStorage.clear();
       this.router.navigate(["login"]);
     });

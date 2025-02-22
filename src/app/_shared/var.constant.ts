@@ -1,4 +1,7 @@
-export const HOST = 'https://cashflow-rest.herokuapp.com';
-export const TOKEN_AUTH_USERNAME = 'cashflowapp';
-export const TOKEN_AUTH_PASSWORD = 'RJ$tar0510*'
-export const TOKEN_NAME = 'access_token';
+import { environment } from "@envs/environment";
+
+export const HOST = environment.HOST;
+export const TOKEN_AUTH_USERNAME = environment.TOKEN_AUTH_USERNAME;
+export const TOKEN_AUTH_PASSWORD = environment.TOKEN_AUTH_PASSWORD;
+export const TOKEN_NAME = environment.TOKEN_NAME;
+export const RETRIES = 3;

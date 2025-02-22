@@ -21,13 +21,13 @@ export class TransactionDeleteComponent implements OnInit {
     this.transaction.amount = this.data.amount;
     this.transaction.currency = this.data.currency;
     this.transaction.date = this.data.date;
-    this.transaction.category = this.data.category;
-    this.transaction.account = this.data.account;
+    //this.transaction.category = this.data.category;
+    //this.transaction.account = this.data.account;
   }
 
   deleteData() {
     this.transactionService.deleteTransaction(this.transaction.transactionId).subscribe(data => {
-      this.transactionService.listTransaction(0, 5).subscribe(data => {
+      this.transactionService.getUserTransactions(0, 5).subscribe(data => {
         this.transactionService.transactionChange.next(data);
         this.transactionService.messageChange.next('transaction removed');
       });

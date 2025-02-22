@@ -51,7 +51,7 @@ export class CategoryComponent implements OnInit {
   }
 
   listAllCategories() {
-    this.categoryService.listCategory().subscribe(data => {
+    this.categoryService.getUserCategories().subscribe(data => {
       this.show = data.length != 0;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
@@ -66,7 +66,7 @@ export class CategoryComponent implements OnInit {
 
   categoryTypeSelected() {
     if (this.catType > 0) {
-      this.categoryService.listCategorybyCategoryType(this.catType).subscribe(data => {
+      this.categoryService.findUserCategoroesbyCategoryType(this.catType).subscribe(data => {
         this.show = data.length != 0;
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
@@ -81,7 +81,7 @@ export class CategoryComponent implements OnInit {
     let cat = category != null ? category : new Category();
     this.dialog.open(CategoryUpdateComponent, {
       width: '250px',
-      disableClose: true,
+      disableClose: false,
       data: cat
     });
   }
